@@ -35,7 +35,7 @@ function cadastrar() {
         if (data === null) {
             console.log('Successo: Cadastro realizado!');
             alert('Cadastro realizado!');
-            window.location.href = 'index.html'; // Redireciona para o login
+            window.location.href = 'login.html'; // Redireciona para o login
         }
     })
     .catch((error) => {

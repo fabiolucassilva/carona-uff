@@ -8,28 +8,59 @@
     <title>Página Inicial</title>
 </head>
 <body>
+
 <header>
     <nav>
-        <h2>UFF Caronas</h2>
+        <h2 id="h2_branco">UFF Caronas</h2>
         <ul>
-            <li><a href="#5">Veículos</a></li>
-            <li><a href="#2">Ver Caronas</a></li>
-            <li><a href="#3">Pedir Caronas</a></li>
-            <li><a href="#4">Editar Dados</a></li>
-            <li><a href="#5">Sair</a></li>
+            <li><a href="#1">Ver Caronas Disponíveis</a></li>
+            <li><a href="#2">Pedir Caronas</a></li>
+            <li><a href="#3">Oferecer Caronas</a></li>
+            <li><a href="#4">Ver Veículos</a></li>
+            <li><a href="#5">Editar Dados</a></li>
+            <li><a href="#6" onclick="logout()">Sair</a></li>
         </ul>
     </nav>
 </header>
 
-<h1>Bem-vindo à Página Inicial</h1>
+<div class="container">
+    <div class="left-column">
+        <h2 id="user-header">Informações do Usuário</h2>
+        <br>
+        <p id="user-nome">Carregando Nome...</p>
+        <p id="user-cpf">Carregando Cpf...</p>
+        <p id="user-email">Carregando Email...</p>
+        <p id="user-reputacao">Carregando Reputacao...</p>
+        <br>
+        <div class="button-group">
+            <button class="btn_lado" onclick="editarInformacoes()">Editar Informações de Usuário</button>
+            <button class="btn_lado" onclick="editarVeiculos()">Editar Veículos</button>
+            <button class="btn_lado" onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <div class="right-column">
+        <h2>Solicitar Carona</h2>
+        <form id="solicitar-carona-form">
+            <input type="text" placeholder="Local de Partida" required>
+            <input type="text" placeholder="Destino" required>
+            <input type="date" placeholder="Data" required>
+            <input type="time" placeholder="Hora" required>
+            <input type="number" placeholder="Quantidade de Passageiros" required>
+            <button class="btn_cima" type="submit">Pedir Carona</button>
+        </form>
 
-<div class="main-content">
-    <h2>Procurar Caronas</h2>
-    <div class="search-box">
-        <input type="text" placeholder="Origem">
-        <input type="text" placeholder="Destino">
-        <button type="button">Procurar</button>
+        <h2>Oferecer Carona</h2>
+        <form id="oferecer-carona-form">
+            <input type="text" placeholder="Veículo" required>
+            <input type="text" placeholder="Local de Saída" required>
+            <input type="text" placeholder="Local de Chegada" required>
+            <input type="date" placeholder="Data" required>
+            <input type="time" placeholder="Hora" required>
+            <input type="number" placeholder="Capacidade de Passageiros" required>
+            <button class="btn_cima" type="submit">Oferecer Carona</button>
+        </form>
     </div>
 </div>
+
 </body>
 </html>

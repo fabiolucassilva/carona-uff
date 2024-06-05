@@ -20,23 +20,18 @@ public class LoginController {
     @Autowired
     private UsuarioRepository repository;
 
-    /**
-     * API Post para login de usuário
-     * Valida no banco se a senha digitada bate para o e-mail também digitado
-     * OBS: Não é feito nenhum tipo de criptografia nesta versão
-     */
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     @Transactional
     public ResponseEntity<?> loginUsuario(@RequestBody @Valid LoginRequest loginRequest) {
-        // Buscando usuário pelo e-mail
         Optional<Usuario> optionalUsuario = repository.findByEmailAndAtivoTrue(loginRequest.getEmail());
         Map<String, String> response = new HashMap<>();
         if (optionalUsuario.isPresent()) {
             Usuario usuario = optionalUsuario.get();
-            // Validando a senha deste usuário
             if (usuario.getSenha().equals(loginRequest.getSenha())) {
+                String token = "token_carona_" + usuario.getId();
                 response.put("message", "Login realizado!");
+                response.put("token", token);
                 return ResponseEntity.ok().body(response);
             } else {
                 response.put("message", "Senha e/ou E-mail Inválido!");
@@ -45,6 +40,18 @@ public class LoginController {
         } else {
             response.put("message", "Usuário não encontrado!");
             return ResponseEntity.status(404).body(response);
+        }
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping("/usuario")
+    public ResponseEntity<?> getUsuario(@RequestHeader("Authorization") String token) {
+        String userId = token.replace("token_carona_", "");
+        Optional<Usuario> optionalUsuario = repository.findById(Integer.parseInt(userId));
+        if (optionalUsuario.isPresent()) {
+            return ResponseEntity.ok(optionalUsuario.get());
+        } else {
+            return ResponseEntity.status(404).body("Usuário não encontrado!");
         }
     }
 }

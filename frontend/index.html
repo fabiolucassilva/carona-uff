@@ -3,24 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style-login.css">
-    <script src="script/script-login.js" defer></script>
-    <title>Carona UFF - Login</title>
-    <style>
-        body {
-            background-image: url('https://www.uff.br/sites/default/files/imagens-das-noticias/unnamed_1.png');
-        }
-    </style>
+    <link rel="stylesheet" href="css/style-index.css">
+    <title>UFF Caronas</title>
 </head>
 <body>
-<div class="login-container">
-    <h1>Login</h1>
-    <form action="#" method="POST">
-        <input type="email" class="email" name="email" placeholder="Email" required>
-        <input type="password" class="password" name="password" placeholder="Senha" required>
-        <button type="submit">Login</button>
-    </form>
-    <a href="cadastro.html" class="signup-link">Criar uma conta</a>
-</div>
+<header>
+    <nav>
+        <h2>UFF Caronas</h2>
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#funcionalidades">Funcionalidades</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="cadastro.html">Registrar</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="sobre">
+        <h1>Bem-vindo ao UFF Caronas</h1>
+        <p>O UFF Caronas é um aplicativo que facilita a conexão entre motoristas e passageiros para compartilhamento de caronas. Nosso objetivo é promover uma mobilidade sustentável e econômica para a comunidade universitária da UFF.</p>
+    </section>
+
+    <section id="funcionalidades">
+        <h2>Funcionalidades</h2>
+        <ul>
+            <li><strong>Autenticação de Usuário:</strong> Permite que os usuários se autentiquem para acessar as funcionalidades do aplicativo.</li>
+            <li><strong>Pedir Carona:</strong> Os usuários podem solicitar uma carona informando o local de partida, destino, data, hora e quantidade de passageiros. O sistema busca caronas disponíveis ou armazena o pedido até que um motorista aceite a rota.</li>
+            <li><strong>Oferecer Carona:</strong> Usuários podem adicionar veículos ao seu perfil e oferecer caronas, informando dados como local de saída, chegada, data, hora e capacidade de passageiros. Eles podem aceitar corridas automaticamente ou manualmente.</li>
+            <li><strong>Listar Caronas:</strong> Visualize informações sobre caronas passadas e atuais, incluindo trajeto, motorista, veículo e outros passageiros. Caronas passadas podem ser avaliadas e as atuais permitem chat e cancelamento.</li>
+            <li><strong>Ver Perfil do Usuário:</strong> Usuários podem visualizar e atualizar seus dados, incluindo informações sobre veículos e reputação.</li>
+            <li><strong>Aceitar Solicitações de Carona (Opcional):</strong> Motoristas podem aceitar manualmente as solicitações de carona para cada passageiro.</li>
+        </ul>
+    </section>
+
+    <div class="button-group">
+        <a href="login.html" class="btn">Login</a>
+        <a href="cadastro.html" class="btn">Registrar</a>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 UFF Caronas. Todos os direitos reservados.</p>
+</footer>
 </body>
 </html>
