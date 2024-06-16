@@ -2,10 +2,7 @@ package com.uff_carona.carona.controllers;
 
 import com.uff_carona.carona.domain.usuario.Usuario;
 import com.uff_carona.carona.domain.usuario.UsuarioRepository;
-import com.uff_carona.carona.domain.veiculo.UsuarioVeiculo;
-import com.uff_carona.carona.domain.veiculo.UsuarioVeiculoRepository;
-import com.uff_carona.carona.domain.veiculo.Veiculo;
-import com.uff_carona.carona.domain.veiculo.VeiculoRepository;
+import com.uff_carona.carona.domain.veiculo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario-veiculos")
@@ -29,16 +27,25 @@ public class UsuarioVeiculoController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
-    public ResponseEntity<List<UsuarioVeiculo>> getAllUsuarioVeiculos() {
-        List<UsuarioVeiculo> usuarioVeiculos = usuarioVeiculoRepository.findAll();
-        return ResponseEntity.ok(usuarioVeiculos);
+    public List<ResponseUsuarioVeiculo> getAllUsuarioVeiculos() {
+        List<ResponseUsuarioVeiculo> usuarioVeiculosList = usuarioVeiculoRepository.findAll().stream().map(ResponseUsuarioVeiculo::new).toList();
+
+        return usuarioVeiculosList;
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping("/{id}")
-    public ResponseEntity<UsuarioVeiculo> getUsuarioVeiculoById(@PathVariable Integer id) {
-        Optional<UsuarioVeiculo> usuarioVeiculoOptional = usuarioVeiculoRepository.findById(id);
-        return usuarioVeiculoOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<List<ResponseUsuarioVeiculo>> getUsuarioVeiculoByUsuarioId(@PathVariable Integer idUsuario) {
+        List<UsuarioVeiculo> usuarioVeiculos = usuarioVeiculoRepository.findByUsuarioId(idUsuario);
+
+        if (!usuarioVeiculos.isEmpty()) {
+            List<ResponseUsuarioVeiculo> responseUsuarioVeiculos = usuarioVeiculos.stream()
+                    .map(ResponseUsuarioVeiculo::new)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(responseUsuarioVeiculos);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
